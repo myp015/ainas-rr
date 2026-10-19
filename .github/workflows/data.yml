@@ -6,11 +6,15 @@
 #
 
 name: Data
+# AiNas: 已移除 `release: types: [created]` 自动触发，只保留手动 workflow_dispatch。
+# 上游原设计假设「本仓库自己发版 → 顺手生成本仓库的 docs 数据」，但我们的分工是：
+#   - loader 由 ainas-build/ainas-rr.yml 遥控构建，**每构建一次就在本仓库创建一个 release**
+#     （实测 2026-10-07~10-19 共 16 次），于是本工作流被 release 事件反复拉起；
+#   - 它下载的是**本仓库**那个刚创建的 release 的 `rr-<TAG>.img.zip`，而 asset 上传与
+#     `release created` 事件有时序竞争 ⇒ 20 次里 17 次 failure（拿到 404 的 9 字节响应）；
+#   - 成功时还会 `git push -f` 往 main 写 docs/（强推，无必要）。
+# 数据生成统一由 ainas-build/data.yml 手动跑（从 RROrg/rr 拉数据），本文件保留仅供按需手动执行。
 on:
-  release:
-    types:
-      - created
-
   workflow_dispatch:
     inputs:
       data:
@@ -106,7 +110,9 @@ jobs:
           retention-days: 5
 
       - name: Check and Push
-        if: success() && (inputs.push == true || github.event.action == 'created')
+        # AiNas: 原为 `inputs.push == true || github.event.action == 'created'`。
+        # release 触发已移除 ⇒ `github.event.action` 恒为空 ⇒ 该分支恒假，故简化（语义等价）。
+        if: success() && inputs.push == true
         run: |
           echo "Git push ..."
           # git checkout main
