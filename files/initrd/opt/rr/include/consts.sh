@@ -8,7 +8,7 @@
 
 # shellcheck disable=SC2034
 
-RR_VERSION="26.10.25"
+RR_VERSION="26.10.26"
 RR_RELEASE=""
 RR_TITLE="RR v${RR_VERSION}"
 
