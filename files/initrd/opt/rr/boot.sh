@@ -265,7 +265,14 @@ fi
 #     CMDLINE['modprobe.blacklist']+="sdhci,sdhci_pci,sdhci_acpi"
 #   fi
 # fi
-if [ "${DT}" = "true" ] && ! echo "purley broadwellnkv2 epyc7002 epyc7003 epyc7003ntb geminilakenk icelaked r1000nk v1000nk" | grep -wq "${PLATFORM}"; then
+# AiNas: geminilake / r1000 / v1000 移出 mpt3sas 黑名单（追加到白名单末尾）。
+# 这三个平台 DT=true 且内核开 CONFIG_SYNO_PORT_MAPPING_V2，其 HBA(mpt3sas) 盘由 LKM
+# sata_port_shim 改型为 SATA 并填 syno_block_info，盘名走 sataN、进 model.dts 的
+# internal_slot@N，不再落 sd.c 的 default: 分支，故拉黑 mpt3sas 只会让 HBA 卡认不到。
+# 配套要求：LKM >= 26.10.65（含 sata_port_shim 的 PORT_MAPPING_V2 修复，4.x commit 0353bde），
+# 否则 DT 平台的 HBA 盘会保持 UNKNOWN 落 default: 分支，请还原本行。
+# 注：至此 platforms.yml 里 DT=true 的平台已全部落在白名单内，该分支不再对任何平台生效。
+if [ "${DT}" = "true" ] && ! echo "purley broadwellnkv2 epyc7002 epyc7003 epyc7003ntb geminilakenk icelaked r1000nk v1000nk geminilake r1000 v1000" | grep -wq "${PLATFORM}"; then
   if ! echo "${CMDLINE['modprobe.blacklist']}" | grep -q "mpt3sas"; then
     [ ! "${CMDLINE['modprobe.blacklist']}" = "" ] && CMDLINE['modprobe.blacklist']+=","
     CMDLINE['modprobe.blacklist']+="mpt3sas"
