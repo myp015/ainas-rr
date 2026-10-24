@@ -44,7 +44,20 @@ productvers4-74: &productvers4-74
   "7.4":
     kpre: "7.4"
     kver: "4.4.302"
-  
+
+# DSM 6.2（最后一个支持它的 RR 版本是 24.4.0）。内核版本按平台分两组：
+#   4.4.59   apollolake / broadwellnk / broadwellntbap / denverton / geminilake / purley / v1000
+#   3.10.105 broadwell
+# 对应 LKM 产物名 rp-<platform>-6.2-<kver>-<target>.ko.gz（见 ainas-lkm 的 PLATFORMS）
+productvers4-62: &productvers4-62
+  "6.2":
+    kpre: "6.2"
+    kver: "4.4.59"
+productvers3-62: &productvers3-62
+  "6.2":
+    kpre: "6.2"
+    kver: "3.10.105"
+
 productvers5-71: &productvers5-71
   "7.1":
     kpre: "7.1"
@@ -71,12 +84,12 @@ platforms:
       <<: *synoinfo
       HddEnableDynamicPower: "no"
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwell:
     dt: false
     synoinfo: *synoinfo
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers3-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwellnk:
     dt: false
     synoinfo:
@@ -84,7 +97,7 @@ platforms:
       support_bde_internal_10g: "no"
       supportsas: "no"
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwellnkv2:
     dt: true
     synoinfo:
@@ -107,19 +120,19 @@ platforms:
       support_install_only_dev: "no"
       required_system_disk_number: "0"
     productvers:
-      <<: [*productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   denverton:
     dt: false
     flags: ["movbe"]
     synoinfo: *synoinfo
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   geminilake:
     dt: true
     noflags: ["x2apic"]
     synoinfo: *synoinfo
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   purley:
     dt: true
     noflags: ["x2apic"]
@@ -133,7 +146,7 @@ platforms:
       required_system_disk_number: "0"
       internal_disk_without_led_mask: "no"
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   r1000:
     dt: true
     synoinfo: *synoinfo
@@ -143,7 +156,7 @@ platforms:
     dt: true
     synoinfo: *synoinfo
     productvers:
-      <<: [*productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   epyc7002:
     dt: true
     synoinfo:
