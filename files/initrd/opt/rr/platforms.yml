@@ -58,6 +58,131 @@ productvers3-62: &productvers3-62
     kpre: "6.2"
     kver: "3.10.105"
 
+# DSM 6.2 专用配置（取自 RR 24.4.0 model-configs）。24.4.0 是「型号级」配置且同一型号的 6.2 与 7.x
+# 共用一份；本仓库是「平台级」锚点，故 6.2 需要独立的一套，不能沿用上面的 7.x 锚点：
+#   - netif_seq 在 6.2 必须显式列出序号（本仓库 7.x 锚点为空）
+#   - support_syno_hybrid_raid / supportraidgroup 在 6.2 不写该键（空值 ⇒ _set_conf_kv 删行）
+#   - HddEnableDynamicPower 在 6.2 为 yes（apollolake 的 7.x 平台锚点是 no）
+# 型号级差异（ext4 / SSD 缓存 / SAS / OOB）见文件末尾的 synoinfo62Models。
+synoinfo62-apollolake: &synoinfo62-apollolake
+  HddEnableDynamicPower: "yes"
+  buzzeroffen: "0xffff"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_leds_lp3943: "no"
+  support_memory_compatibility: "no"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  supportraidgroup:
+synoinfo62-broadwell: &synoinfo62-broadwell
+  HddEnableDynamicPower: "yes"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_printer: "yes"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  support_usb_printer: "yes"
+  supportraidgroup:
+synoinfo62-broadwellnk: &synoinfo62-broadwellnk
+  HddEnableDynamicPower: "yes"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_bde_internal_10g: "no"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_oob_ctl: "no"
+  support_printer: "yes"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  support_usb_printer: "yes"
+  supportraidgroup:
+synoinfo62-denverton: &synoinfo62-denverton
+  HddEnableDynamicPower: "yes"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_bde_internal_10g: "no"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  supportraidgroup:
+synoinfo62-geminilake: &synoinfo62-geminilake
+  HddEnableDynamicPower: "yes"
+  buzzeroffen: "0xffff"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  supportraidgroup:
+synoinfo62-purley: &synoinfo62-purley
+  HddEnableDynamicPower: "yes"
+  buzzeroffen: "0xffff"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_multipath: "yes"
+  support_printer: "yes"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  support_usb_printer: "yes"
+  supportext4: "yes"
+  supportraidgroup:
+  supportsas: "no"
+  supportsas_v2_r1: "no"
+synoinfo62-v1000: &synoinfo62-v1000
+  HddEnableDynamicPower: "yes"
+  maxlanport: "8"
+  netif_seq: "0 1 2 3 4 5 6 7"
+  support_disk_compatibility: "no"
+  support_led_brightness_adjustment: "no"
+  support_memory_compatibility: "no"
+  support_syno_hybrid_raid:
+  support_uasp: "yes"
+  supportraidgroup:
+
+# DSM 6.2 的内核 cmdline（24.4.0 为型号级，实际按平台分成 4 组）。
+cmdline62-4: &cmdline62-4
+  HddHotplug: "1"
+  SMBusHddDynamicPower: "1"
+  syno_hdd_detect: "0"
+  syno_hdd_powerup_seq: "0"
+  vender_format_version: "2"
+  elevator: "elevator"
+cmdline62-gemini: &cmdline62-gemini
+  HddHotplug: "1"
+  intel_iommu: "igfx_off"
+  syno_ttyS0: "serial,0x3f8"
+  syno_ttyS1: "serial,0x2f8"
+  vender_format_version: "2"
+  elevator: "elevator"
+cmdline62-tty: &cmdline62-tty
+  HddHotplug: "1"
+  syno_ttyS0: "serial,0x3f8"
+  syno_ttyS1: "serial,0x2f8"
+  vender_format_version: "2"
+  elevator: "elevator"
+cmdline62-sas: &cmdline62-sas
+  HddHotplug: "1"
+  SASmodel: "1"
+  syno_ttyS0: "serial,0x3f8"
+  syno_ttyS1: "serial,0x2f8"
+  vender_format_version: "2"
+  elevator: "elevator"
+# 6.2 专属 cmdline 键的并集，供从 6.2 切回 7.x 时清理（须覆盖上面 cmdline62-* 的全部键）
+cmdline62Keys: ["HddHotplug", "SMBusHddDynamicPower", "syno_hdd_detect", "syno_hdd_powerup_seq", "vender_format_version", "elevator", "intel_iommu", "syno_ttyS0", "syno_ttyS1", "SASmodel"]
+
 productvers5-71: &productvers5-71
   "7.1":
     kpre: "7.1"
@@ -83,11 +208,18 @@ platforms:
     synoinfo:
       <<: *synoinfo
       HddEnableDynamicPower: "no"
+    synoinfo62: *synoinfo62-apollolake
+    cmdline62: *cmdline62-4
+    models62: ["DS1019+", "DS718+", "DS918+"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwell:
     dt: false
     synoinfo: *synoinfo
+    synoinfo62: *synoinfo62-broadwell
+    cmdline62: *cmdline62-4
+    models62: ["DS3617xs", "RS3618xs"]
+    dom1: ["DS3617xs"]
     productvers:
       <<: [*productvers3-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwellnk:
@@ -96,6 +228,10 @@ platforms:
       <<: *synoinfo
       support_bde_internal_10g: "no"
       supportsas: "no"
+    synoinfo62: *synoinfo62-broadwellnk
+    cmdline62: *cmdline62-4
+    models62: ["DS1621xs+", "RS1619xs+", "RS3621xs+", "RS4021xs+", "SA3400", "SA3600"]
+    dom1: ["DS1621xs+", "SA3400", "SA3600"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   broadwellnkv2:
@@ -120,17 +256,23 @@ platforms:
       support_install_only_dev: "no"
       required_system_disk_number: "0"
     productvers:
-      <<: [*productvers4-62, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
+      <<: [*productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   denverton:
     dt: false
     flags: ["movbe"]
     synoinfo: *synoinfo
+    synoinfo62: *synoinfo62-denverton
+    cmdline62: *cmdline62-4
+    models62: ["DS1819+", "DS2419+", "DVA3219", "DVA3221"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   geminilake:
     dt: true
     noflags: ["x2apic"]
     synoinfo: *synoinfo
+    synoinfo62: *synoinfo62-geminilake
+    cmdline62: *cmdline62-gemini
+    models62: ["DS1520+", "DS220+", "DS720+", "DS920+"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   purley:
@@ -145,6 +287,10 @@ platforms:
       isolated_disk_system: "no"
       required_system_disk_number: "0"
       internal_disk_without_led_mask: "no"
+    synoinfo62: *synoinfo62-purley
+    cmdline62: *cmdline62-sas
+    models62: ["FS6400", "HD6500"]
+    dom1: ["FS6400", "HD6500"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   r1000:
@@ -155,6 +301,9 @@ platforms:
   v1000:
     dt: true
     synoinfo: *synoinfo
+    synoinfo62: *synoinfo62-v1000
+    cmdline62: *cmdline62-tty
+    models62: ["DS1621+", "DS1821+", "RS1221+"]
     productvers:
       <<: [*productvers4-62, *productvers4-70, *productvers4-71, *productvers4-72, *productvers4-73, *productvers4-74]
   epyc7002:
@@ -216,3 +365,36 @@ platforms:
       show_autoupdatetype_notify: "yes"
     productvers:
       <<: [*productvers5-72, *productvers5-73, *productvers5-74]
+
+# DSM 6.2 的型号级 synoinfo 差异（叠加在平台级 synoinfo62 之上）。
+# 空值 = 不写该键（ramdisk-patch.sh 里 _set_conf_kv 对空值是删行）。
+synoinfo62Models:
+  "RS3618xs":
+    supportext4: "yes"
+    supportssdcache: "no"
+  "RS1619xs+":
+    supportext4: "yes"
+    support_oob_ctl:
+  "RS3621xs+":
+    supportext4: "yes"
+    support_oob_ctl:
+  "RS4021xs+":
+    supportext4: "yes"
+    support_oob_ctl:
+  "SA3400":
+    supportext4: "yes"
+    supportsas: "no"
+    support_oob_ctl:
+  "SA3600":
+    supportext4: "yes"
+    supportsas: "no"
+    support_oob_ctl:
+  "RS1221+":
+    support_bde_internal_10g: "no"
+    supportext4: "yes"
+  "HD6500":
+    internal_disk_without_led_mask: "no"
+    isolated_disk_system: "no"
+    required_system_disk_number: "0"
+    support_install_only_dev: "no"
+    supportsas_v2_r1:

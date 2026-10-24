@@ -308,6 +308,18 @@ function reconfiguringM() {
 function productversMenu() {
   ITEMS="$(readConfigEntriesArray "platforms.${PLATFORM}.productvers" "${WORK_PATH}/platforms.yml" | sort -r)"
 
+  # 按型号过滤：同一平台下的版本并非都支持当前型号（6.2 只支持 RR 24.4.0 里的那批型号）。
+  # 版本条目挂在共享锚点上、无法携带平台级信息，故白名单放在平台级的 models62。
+  FILTERED=""
+  while read -r VER; do
+    [ -z "${VER}" ] && continue
+    if [ "${VER}" = "6.2" ] && ! readConfigArray "platforms.${PLATFORM}.models62" "${WORK_PATH}/platforms.yml" | grep -qxF "${MODEL}"; then
+      continue
+    fi
+    FILTERED+="${VER}"$'\n'
+  done <<<"${ITEMS}"
+  ITEMS="${FILTERED}"
+
   VAL=""
   [ -n "$(echo "${1}" | cut -d'.' -f1,2)" ] && echo "${ITEMS}" | grep -qw "$(echo "${1}" | cut -d'.' -f1,2)" && VAL="$(echo "${1}" | cut -d'.' -f1,2)"
   DIALOG --err "${VAL}" --title "$(TEXT "Product Version")" \
@@ -410,6 +422,58 @@ function productversMenu() {
 }
 
 ###############################################################################
+# Apply DSM 6.2 specific overrides to the user config
+# 1 - Product version
+# DSM 6.2（RR 24.4.0 是最后一个支持它的版本）与 7.x 不同源：synoinfo 整套、内核 cmdline、引导盘
+# satadom 都要按 24.4.0 的型号级配置重灌，不能沿用 7.x 的平台锚点（7.x 独有的键 6.2 不认）。
+function applyVersionOverrides() {
+  local PRODUCTVER="${1}"
+  case "${PRODUCTVER}" in
+    "6.2") ;;
+    *)
+      # 从 6.2 切回其它版本：清掉 6.2 专属的 cmdline 键，避免残留（键集合见 platforms.yml 的 cmdline62Keys）
+      while read -r K; do
+        [ -z "${K}" ] && continue
+        deleteConfigKey "cmdline.\"${K}\"" "${USER_CONFIG_FILE}"
+      done <<<"$(readConfigArray "cmdline62Keys" "${WORK_PATH}/platforms.yml")"
+      return 0
+      ;;
+  esac
+
+  local MAP
+  MAP="$(readConfigMap "platforms.${PLATFORM}.synoinfo62" "${WORK_PATH}/platforms.yml")"
+  if [ -z "${MAP}" ]; then
+    echo "ERROR: platforms.${PLATFORM}.synoinfo62 is missing, cannot configure DSM ${PRODUCTVER} for ${MODEL}" >&2
+    return 1
+  fi
+
+  # synoinfo：整套替换（7.x 锚点里的 supportext4/support_oob_ctl 等键在 24.4.0 的 6.2 配置里没有）
+  writeConfigKey "synoinfo" "{}" "${USER_CONFIG_FILE}"
+  while IFS=': ' read -r KEY VALUE; do
+    [ -z "${KEY}" ] && continue
+    writeConfigKey "synoinfo.\"${KEY}\"" "${VALUE}" "${USER_CONFIG_FILE}"
+  done <<<"${MAP}"
+  # 型号级差异（ext4 / SSD 缓存 / SAS / OOB），空值 = 删该键
+  while IFS=': ' read -r KEY VALUE; do
+    [ -z "${KEY}" ] && continue
+    writeConfigKey "synoinfo.\"${KEY}\"" "${VALUE}" "${USER_CONFIG_FILE}"
+  done <<<"$(readConfigMap "synoinfo62Models.\"${MODEL}\"" "${WORK_PATH}/platforms.yml")"
+
+  # 内核 cmdline（24.4.0 的 6.2 型号级参数，按平台分成 4 组）
+  while IFS=': ' read -r KEY VALUE; do
+    [ -z "${KEY}" ] && continue
+    writeConfigKey "cmdline.\"${KEY}\"" "${VALUE}" "${USER_CONFIG_FILE}"
+  done <<<"$(readConfigMap "platforms.${PLATFORM}.cmdline62" "${WORK_PATH}/platforms.yml")"
+
+  # 引导盘 satadom：6.2 由型号决定（1 或 2），7.x 恒为 2
+  local DOM=2
+  if readConfigArray "platforms.${PLATFORM}.dom1" "${WORK_PATH}/platforms.yml" | grep -qxF "${MODEL}"; then
+    DOM=1
+  fi
+  writeConfigKey "satadom" "${DOM}" "${USER_CONFIG_FILE}"
+}
+
+###############################################################################
 function reconfiguringV() {
   selver="${1}"
   paturl="${2}"
@@ -453,6 +517,9 @@ function reconfiguringV() {
   while IFS=': ' read -r KEY VALUE; do
     writeConfigKey "synoinfo.\"${KEY}\"" "${VALUE}" "${USER_CONFIG_FILE}"
   done <<<"$(readConfigMap "platforms.${PLATFORM}.synoinfo" "${WORK_PATH}/platforms.yml")"
+
+  # 6.2 与 7.x 不同源，按 RR 24.4.0 的型号级配置覆盖（其它版本是空操作）
+  applyVersionOverrides "${PRODUCTVER}" || return 1
 
   # Check addons
   while IFS=': ' read -r ADDON PARAM; do
@@ -552,6 +619,9 @@ function setConfigFromDSM() {
   while IFS=': ' read -r KEY VALUE; do
     writeConfigKey "synoinfo.\"${KEY}\"" "${VALUE}" "${USER_CONFIG_FILE}"
   done <<<"$(readConfigMap "platforms.${PLATFORM}.synoinfo" "${WORK_PATH}/platforms.yml")"
+
+  # 6.2 与 7.x 不同源，按 RR 24.4.0 的型号级配置覆盖（其它版本是空操作）
+  applyVersionOverrides "${PRODUCTVER}" || return 1
 
   # Check addons
   while IFS=': ' read -r ADDON PARAM; do

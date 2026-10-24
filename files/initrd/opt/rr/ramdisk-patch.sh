@@ -112,8 +112,10 @@ for PE in "${PATCHS[@]}"; do
   done
   [ ${RET} -ne 0 ] && exit 1
 done
-# for DSM 7.3
-sed -i 's#/usr/syno/sbin/broadcom_update.sh#/usr/syno/sbin/broadcom_update.sh.rr#g' "${RAMDISK_PATH}/linuxrc.syno.impl"
+# for DSM 7.3（DSM 6.x 的 ramdisk 没有 linuxrc.syno.impl，跳过）
+if [ -f "${RAMDISK_PATH}/linuxrc.syno.impl" ]; then
+  sed -i 's#/usr/syno/sbin/broadcom_update.sh#/usr/syno/sbin/broadcom_update.sh.rr#g' "${RAMDISK_PATH}/linuxrc.syno.impl"
+fi
 # LKM
 gzip -dc "${LKMS_PATH}/rp-${PLATFORM}-${KPRE:+${KPRE}-}${KVER}-${LKM}.ko.gz" >"${RAMDISK_PATH}/usr/lib/modules/rp.ko" 2>"${LOG_FILE}" || exit 1
 if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
@@ -166,6 +168,14 @@ for ADDON in "${!ADDONS[@]}"; do
   installAddon "${ADDON}" "${PLATFORM}" "${KPRE:+${KPRE}-}${KVER}" || exit 1
   echo "/addons/${ADDON}.sh \${1} ${PARAMS}" >>"${RAMDISK_PATH}/addons/addons.sh" 2>>"${LOG_FILE}" || exit 1
 done
+
+# DSM 6.x 没有 systemd：addon 写的 oneshot unit 无人执行，由 dsm6-services.sh 在 rcExit 阶段
+# 按 multi-user.target.wants 逐个跑 ExecStart。7.x 不复制、不注册。
+if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
+  cp -f "${WORK_PATH}/patch/dsm6-services.sh" "${RAMDISK_PATH}/addons/dsm6-services.sh" 2>>"${LOG_FILE}" || exit 1
+  chmod +x "${RAMDISK_PATH}/addons/dsm6-services.sh"
+  echo "/addons/dsm6-services.sh \${1}" >>"${RAMDISK_PATH}/addons/addons.sh" 2>>"${LOG_FILE}" || exit 1
+fi
 
 # Modules
 echo -n "."
