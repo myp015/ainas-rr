@@ -169,8 +169,9 @@ for ADDON in "${!ADDONS[@]}"; do
   echo "/addons/${ADDON}.sh \${1} ${PARAMS}" >>"${RAMDISK_PATH}/addons/addons.sh" 2>>"${LOG_FILE}" || exit 1
 done
 
-# DSM 6.x 没有 systemd：addon 写的 oneshot unit 无人执行，由 dsm6-services.sh 在 rcExit 阶段
-# 按 multi-user.target.wants 逐个跑 ExecStart。7.x 不复制、不注册。
+# DSM 6.x 没有 systemd：addon 写的 unit 无人执行。dsm6-services.sh 在 late 阶段把自己与一个
+# upstart job 装进 DSM 根（/usr/share/init/rr-addons.conf，start on runlevel 1），由 6.x 的
+# upstart 在每次启动时执行各 unit 的 ExecStart。7.x 不复制、不注册。
 if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
   cp -f "${WORK_PATH}/patch/dsm6-services.sh" "${RAMDISK_PATH}/addons/dsm6-services.sh" 2>>"${LOG_FILE}" || exit 1
   chmod +x "${RAMDISK_PATH}/addons/dsm6-services.sh"
