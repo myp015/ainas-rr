@@ -172,7 +172,19 @@ done
 # DSM 6.x 没有 systemd：addon 写的 unit 无人执行。dsm6-services.sh 在 late 阶段把自己与一个
 # upstart job 装进 DSM 根（/usr/share/init/rr-addons.conf，start on runlevel 1），由 6.x 的
 # upstart 在每次启动时执行各 unit 的 ExecStart。7.x 不复制、不注册。
-if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
+# 判据必须读目标 ramdisk 自己的 VERSION：不能用 KVER 主版本 —— DSM 7.0~7.3 的内核同样是 4.4.x
+# （4.4.180 / 4.4.302），KVER<5 在 RR 里表示「4.4 内核族」（6.2 与 7.x 同时命中），
+# 照它判断会把 7.x 也挂上 dsm6-services，导致 systemd 与它各执行一遍 unit。
+# majorversion 已由上面 `. "${RAMDISK_PATH}/etc/VERSION"` 导入（ramdisk 解包后必然存在，
+# 否则早就 exit 1 了），这里只做实值校验，不再另读文件。
+RAMDISK_MAJOR="${majorversion:-}"
+case "${RAMDISK_MAJOR}" in
+  '' | *[!0-9]*)
+    echo "ERROR: cannot determine DSM major version (majorversion='${RAMDISK_MAJOR}')" >"${LOG_FILE}"
+    exit 1
+    ;;
+esac
+if [ "${RAMDISK_MAJOR}" -lt 7 ]; then
   cp -f "${WORK_PATH}/patch/dsm6-services.sh" "${RAMDISK_PATH}/addons/dsm6-services.sh" 2>>"${LOG_FILE}" || exit 1
   chmod +x "${RAMDISK_PATH}/addons/dsm6-services.sh"
   echo "/addons/dsm6-services.sh \${1}" >>"${RAMDISK_PATH}/addons/addons.sh" 2>>"${LOG_FILE}" || exit 1
