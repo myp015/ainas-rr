@@ -10,7 +10,7 @@
 
 RR_VERSION="26.10.42"
 RR_RELEASE=""
-RR_TITLE="RR v${RR_VERSION}"
+RR_TITLE="AiNas_RR v${RR_VERSION}"
 
 # Define paths
 # CHROOT_PATH: Defined during PC debugging.
