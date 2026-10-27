@@ -124,8 +124,8 @@ if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
 fi
 # for issues/313：无串口时 /dev/console 打不开，init 那句
 # "/bin/ash /linuxrc.syno > /dev/console 2>&1" 失败 → linuxrc.syno 根本不执行。
-# 原判据只看 KVER>=5；DSM 6.2 属于 4.4/3.10 内核族（KVER<5），按平台/版本单独补上。
-if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -ge 5 ] || [ "${PLATFORM}" = "epyc7002" ] || [ "${PRODUCTVER}" = "6.2" ]; then
+# 原判据只看 KVER>=5；DSM 6.2 属于 4.4/3.10 内核族（KVER<5），按版本单独补上。
+if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -ge 5 ] || [ "${PRODUCTVER}" = "6.2" ]; then
   sed -i 's#/dev/console#/var/log/lrc#g' "${RAMDISK_PATH}/usr/bin/busybox"
   sed -i '/^echo "START/a \\nmknod -m 0666 /dev/console c 1 3' "${RAMDISK_PATH}/linuxrc.syno"
   # DSM 6.2 的 ramdisk 自带 /dev/console(5:1)，mknod 会 EEXIST 空跑；真正起作用的是
