@@ -278,6 +278,20 @@ def getpats(workpath, jsonpath, xlsxpath):
                             "sum": S["files"][0].get("checksum", "0" * 32),
                         }
 
+    # DSM 6.2 不在官方 7.x 升级 API 的覆盖范围（RR 24.4.0 起已移除 6.2），上游 pats.xlsx
+    # 也没有 6.2 行。2in1 的 6.2 版本线仍要装系统，这里按官方固定布局补齐两条：
+    #   https://global.synologydownload.com/download/DSM/release/6.2.4/25556/DSM_<型号>_25556.pat
+    # 型号中的 '+' 按官方 URL 规则编码为 %2B；sum 用全 0（跳过校验，与表内其他行一致）。
+    for _M in ("DS918+", "DS3617xs"):
+        pats.setdefault(_M, {}).setdefault(
+            "6.2.4-25556-0",
+            {
+                "url": "https://global.synologydownload.com/download/DSM/release/6.2.4/25556/"
+                f"DSM_{_M.replace('+', '%2B')}_25556.pat",
+                "sum": "0" * 32,
+            },
+        )
+
     if jsonpath:
         with open(jsonpath, "w") as f:
             json.dump(pats, f, indent=4, ensure_ascii=False)

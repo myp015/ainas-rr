@@ -2877,6 +2877,10 @@
         "7.1.0-42661-1": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.1/42661-1/DSM_DS3617xs_42661.pat",
             "sum": "00000000000000000000000000000000"
+        },
+        "6.2.4-25556-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/6.2.4/25556/DSM_DS3617xs_25556.pat",
+            "sum": "00000000000000000000000000000000"
         }
     },
     "DS3617xsII": {
@@ -3060,6 +3064,10 @@
         },
         "7.1.0-42661-1": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.1/42661-1/DSM_DS918%2B_42661.pat",
+            "sum": "00000000000000000000000000000000"
+        },
+        "6.2.4-25556-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/6.2.4/25556/DSM_DS918%2B_25556.pat",
             "sum": "00000000000000000000000000000000"
         }
     },
