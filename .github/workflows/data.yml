@@ -6,15 +6,21 @@
 #
 
 name: Data
-# AiNas: 已移除 `release: types: [created]` 自动触发，只保留手动 workflow_dispatch。
-# 上游原设计假设「本仓库自己发版 → 顺手生成本仓库的 docs 数据」，但我们的分工是：
-#   - loader 由 ainas-build/ainas-rr.yml 遥控构建，**每构建一次就在本仓库创建一个 release**
-#     （实测 2026-10-07~10-19 共 16 次），于是本工作流被 release 事件反复拉起；
-#   - 它下载的是**本仓库**那个刚创建的 release 的 `rr-<TAG>.img.zip`，而 asset 上传与
-#     `release created` 事件有时序竞争 ⇒ 20 次里 17 次 failure（拿到 404 的 9 字节响应）；
-#   - 成功时还会 `git push -f` 往 main 写 docs/（强推，无必要）。
-# 数据生成统一由 ainas-build/data.yml 手动跑（从 RROrg/rr 拉数据），本文件保留仅供按需手动执行。
+# AiNas: 本工作流负责用「某个 release 的 rr-<TAG>.img.zip」重新生成本仓库 docs/ 下的数据表
+# （models / pats / addons / modules / modules_detailed）。
+#
+# 两种触发方式：
+#   1) release: created —— loader 由 ainas-build/ainas-rr.yml 遥控构建，每构建一次就在本仓库
+#      创建一个 release；发版后自动用该 release 的镜像刷新 docs 数据并推回 main。
+#   2) workflow_dispatch —— 手动跑，版本取「最新一个非 draft release」。
+#
+# ⚠️ 历史坑（c1ea3ed 曾因此把 release 触发整体删掉）：`release: created` 事件发生在
+#    **asset 上传完成之前**，直接下载会拿到 404（2026-10-07~10-19 统计 20 次里 17 次因此失败）。
+#    现在改为先用 API 轮询等 asset 出现且体积正常，再下载；最长等 20 分钟。
+#    同时用 concurrency 让最新一次 release 接管，避免旧版本任务堆积。
 on:
+  release:
+    types: [created]
   workflow_dispatch:
     inputs:
       data:
@@ -25,6 +31,14 @@ on:
         description: "push"
         default: false
         type: boolean
+
+# release 触发可能连续到来（同一批构建）；只保留最新一次，旧的直接取消
+concurrency:
+  group: data
+  cancel-in-progress: true
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -42,32 +56,49 @@ jobs:
           sudo timedatectl set-timezone "Asia/Shanghai"
 
       - name: Get Data
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          REPO="${{ github.server_url }}/${{ github.repository }}"
-          PRERELEASE="true"
+          REPO="${GITHUB_REPOSITORY}"
 
-          TAG=""
-          for i in {1..3}; do
-            if [ "${PRERELEASE}" = "true" ]; then
-              TAG="$(curl -skL --connect-timeout 10 "${REPO}/tags" | grep "/refs/tags/.*\.zip" | sed -E 's/.*\/refs\/tags\/(.*)\.zip.*$/\1/' | sort -rV | head -1 | sed 's/^[v|V]//g')"
-            else
-              TAG="$(curl -skL --connect-timeout 10 -w "%{url_effective}" -o /dev/null "${REPO}/releases/latest" | awk -F'/' '{print $NF}' | sed 's/^[v|V]//g')"
-            fi
-            rm -f rr-${TAG}.img.zip
-            STATUS=$(curl -kL --connect-timeout 10 -w "%{http_code}" "${REPO}/releases/download/${TAG}/rr-${TAG}.img.zip" -o "rr-${TAG}.img.zip")
-            if [ $? -eq 0 ] && [ ${STATUS:-0} -eq 200 ]; then
-              break
-            else
-              echo "Download failed, retry $i/3"
-              sleep 60
-            fi
-          done
-          if [ ! -f "rr-${TAG}.img.zip" ] || [ ${STATUS:-0} -ne 200 ]; then
-            echo "Download failed after 3 attempts"
-            exit 1
+          # 1) 选定版本号：release 触发用事件里的 tag；手动触发取最新一个非 draft release
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+            [ -n "${TAG}" ] || { echo "[E] release 事件里取不到 tag"; exit 1; }
+            echo "[INFO] release 触发，版本=${TAG}"
+          else
+            TAG="$(gh api "repos/${REPO}/releases?per_page=20" --jq '[.[] | select(.draft == false)][0].tag_name')"
+            [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "[E] 取不到最新 release 版本号"; exit 1; }
+            echo "[INFO] 手动触发，最新版本=${TAG}"
           fi
 
-          unzip rr-${TAG}.img.zip -d rr rr.img
+          # 2) 等 asset 上传完成：`release: created` 事件早于 asset 上传，直接下载必然 404
+          ASSET="rr-${TAG}.img.zip"
+          SIZE=0
+          for i in $(seq 1 20); do
+            # gh api 不支持 jq 的 --arg，这里整段 JSON 交给 jq
+            SIZE="$(gh api "repos/${REPO}/releases/tags/${TAG}" 2>/dev/null \
+              | jq -r --arg n "${ASSET}" '[.assets[] | select(.name == $n) | .size][0] // 0' 2>/dev/null)"
+            case "${SIZE}" in '' | *[!0-9]*) SIZE=0 ;; esac
+            echo "[INFO] 等待资产 ${ASSET}（第 ${i}/20 次，size=${SIZE}）"
+            [ "${SIZE}" -gt 1048576 ] && break
+            sleep 60
+          done
+          [ "${SIZE}" -gt 1048576 ] || { echo "[E] 等待资产 ${ASSET} 超时（约 20 分钟）"; exit 1; }
+
+          # 3) 下载（网络抖动时重试）
+          for i in 1 2 3; do
+            rm -f "${ASSET}"
+            if gh release download "${TAG}" --repo "${REPO}" --pattern "${ASSET}" --clobber; then
+              break
+            fi
+            echo "[WARN] 下载失败，重试 ${i}/3"
+            sleep 60
+          done
+          [ -f "${ASSET}" ] || { echo "[E] 下载 ${ASSET} 失败"; exit 1; }
+          ls -l "${ASSET}"
+
+          unzip "${ASSET}" -d rr rr.img || { echo "[E] 解压 ${ASSET} 失败"; exit 1; }
 
           sudo apt update
           sudo apt install -y locales busybox dialog gettext sed gawk jq curl 
@@ -110,9 +141,8 @@ jobs:
           retention-days: 5
 
       - name: Check and Push
-        # AiNas: 原为 `inputs.push == true || github.event.action == 'created'`。
-        # release 触发已移除 ⇒ `github.event.action` 恒为空 ⇒ 该分支恒假，故简化（语义等价）。
-        if: success() && inputs.push == true
+        # release 触发一律推送（发版后自动刷新 docs）；手动触发沿用 push 开关
+        if: success() && (github.event_name == 'release' || inputs.push == true)
         run: |
           echo "Git push ..."
           # git checkout main
