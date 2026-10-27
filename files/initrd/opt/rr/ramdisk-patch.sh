@@ -121,10 +121,19 @@ gzip -dc "${LKMS_PATH}/rp-${PLATFORM}-${KPRE:+${KPRE}-}${KVER}-${LKM}.ko.gz" >"$
 if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -lt 5 ]; then
   # Copying fake modprobe
   cp -f "${WORK_PATH}/patch/iosched-trampoline.sh" "${RAMDISK_PATH}/usr/sbin/modprobe"
-else
-  # for issues/313
+fi
+# for issues/313：无串口时 /dev/console 打不开，init 那句
+# "/bin/ash /linuxrc.syno > /dev/console 2>&1" 失败 → linuxrc.syno 根本不执行。
+# 原判据只看 KVER>=5；DSM 6.2 属于 4.4/3.10 内核族（KVER<5），按平台/版本单独补上。
+if [ "$(echo "${KVER:-4}" | cut -d'.' -f1)" -ge 5 ] || [ "${PLATFORM}" = "epyc7002" ] || [ "${PRODUCTVER}" = "6.2" ]; then
   sed -i 's#/dev/console#/var/log/lrc#g' "${RAMDISK_PATH}/usr/bin/busybox"
   sed -i '/^echo "START/a \\nmknod -m 0666 /dev/console c 1 3' "${RAMDISK_PATH}/linuxrc.syno"
+  # DSM 6.2 的 ramdisk 自带 /dev/console(5:1)，mknod 会 EEXIST 空跑；真正起作用的是
+  # 上面 busybox 那条（把 init 的重定向换到普通文件）。有真实串口时把脚本输出接回 ttyS0，
+  # 无串口时 devtmpfs 里没有 ttyS0 节点，保持写 /var/log/lrc。
+  if [ "${PRODUCTVER}" = "6.2" ]; then
+    sed -i '/^mount -t devtmpfs none \/dev$/a if : >/dev/ttyS0 2>/dev/null; then exec >/dev/ttyS0 2>&1; fi' "${RAMDISK_PATH}/linuxrc.syno"
+  fi
 fi
 
 if [ "${PLATFORM}" = "broadwellntbap" ]; then
