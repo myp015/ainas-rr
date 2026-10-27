@@ -107,7 +107,9 @@ jobs:
 
           # Backup the original python3 executable.
           sudo mv -f "$(realpath $(which python3))/EXTERNALLY-MANAGED" "$(realpath $(which python3))/EXTERNALLY-MANAGED.bak" 2>/dev/null || true
-          sudo pip3 install -U -r scripts/requirements.txt
+          # --ignore-installed：ubuntu-latest 预装的 click 由 debian 包管理、没有 RECORD 文件，
+          # pip 走「先卸载再装」会报 uninstall-no-record-file 而失败；忽略已安装版本直接覆盖即可。
+          sudo pip3 install -U --ignore-installed -r scripts/requirements.txt
 
           . scripts/func.sh "${{ secrets.RRORG }}"
 
