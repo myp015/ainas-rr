@@ -8,7 +8,7 @@
 
 # shellcheck disable=SC2034
 
-RR_VERSION="26.10.42"
+RR_VERSION="26.10.43"
 RR_RELEASE=""
 RR_TITLE="AiNas_RR v${RR_VERSION}"
 
