@@ -5,6 +5,46 @@
             "sum": "00000000000000000000000000000000"
         }
     },
+    "DS1525neo+": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS1525neo%2B_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
+    "DS1825neo+": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS1825neo%2B_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
+    "DS725neo+": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS725neo%2B_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
+    "DS925neo+": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS925neo%2B_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
+    "FS6420": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_FS6420_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        },
+        "7.3.2-86009-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.3.2/86009/DSM_FS6420_86009.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
+    "RS11626xs+": {
+        "7.4.1-90080-0": {
+            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_RS11626xs%2B_90080.pat",
+            "sum": "00000000000000000000000000000000"
+        }
+    },
     "DS1019+": {
         "7.4.1-90080-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS1019%2B_90080.pat",
@@ -158,12 +198,6 @@
         },
         "7.2.2-72806-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.2.2/72806/DSM_DS1525%2B_72806.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
-    "DS1525neo+": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS1525neo%2B_90080.pat",
             "sum": "00000000000000000000000000000000"
         }
     },
@@ -412,12 +446,6 @@
         },
         "7.2.2-72806-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.2.2/72806/DSM_DS1825%2B_72806.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
-    "DS1825neo+": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS1825neo%2B_90080.pat",
             "sum": "00000000000000000000000000000000"
         }
     },
@@ -973,12 +1001,6 @@
             "sum": "00000000000000000000000000000000"
         }
     },
-    "DS725neo+": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS725neo%2B_90080.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
     "DS920+": {
         "7.4.1-90080-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS920%2B_90080.pat",
@@ -1086,12 +1108,6 @@
         },
         "7.2.2-72806-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.2.2/72806/DSM_DS925%2B_72806.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
-    "DS925neo+": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_DS925neo%2B_90080.pat",
             "sum": "00000000000000000000000000000000"
         }
     },
@@ -1481,16 +1497,6 @@
             "sum": "00000000000000000000000000000000"
         }
     },
-    "FS6420": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_FS6420_90080.pat",
-            "sum": "00000000000000000000000000000000"
-        },
-        "7.3.2-86009-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.3.2/86009/DSM_FS6420_86009.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
     "HD6500": {
         "7.4.1-90080-0": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_HD6500_90080.pat",
@@ -1526,12 +1532,6 @@
         },
         "7.1.1-42962-1": {
             "url": "https://global.synologydownload.com/download/DSM/release/7.1.1/42962-1/DSM_HD6500_42962.pat",
-            "sum": "00000000000000000000000000000000"
-        }
-    },
-    "RS11626xs+": {
-        "7.4.1-90080-0": {
-            "url": "https://global.synologydownload.com/download/DSM/release/7.4.1/90080/DSM_RS11626xs%2B_90080.pat",
             "sum": "00000000000000000000000000000000"
         }
     },
