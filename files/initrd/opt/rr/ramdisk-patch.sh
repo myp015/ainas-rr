@@ -97,6 +97,7 @@ PATCHS=(
   "ramdisk-etc-rc-*.patch"
   "ramdisk-init-script-*.patch"
   "ramdisk-post-init-script-*.patch"
+  "ramdisk-disable-root-pwd-*.patch"
 )
 for PE in "${PATCHS[@]}"; do
   RET=1
