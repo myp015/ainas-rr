@@ -3338,6 +3338,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -3388,6 +3392,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -3522,6 +3538,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -3592,6 +3620,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -3665,6 +3701,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -4678,6 +4718,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -4761,74 +4813,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -5192,6 +5176,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -5242,6 +5230,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -5376,6 +5376,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -5446,6 +5458,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -5519,6 +5539,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -6532,6 +6556,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -6615,74 +6651,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -7046,6 +7014,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -7096,6 +7068,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -7230,6 +7214,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -7300,6 +7296,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -7373,6 +7377,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -8386,6 +8394,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -8469,74 +8489,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -11726,6 +11678,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -11920,6 +11884,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -12882,6 +12854,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -12965,86 +12949,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -13440,6 +13344,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -13634,6 +13550,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -14596,6 +14520,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -14679,86 +14615,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -15154,6 +15010,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -15348,6 +15216,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -16310,6 +16186,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -16393,86 +16281,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -19902,6 +19710,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -20104,6 +19924,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -21066,6 +20894,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -21149,86 +20989,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -21624,6 +21384,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -21826,6 +21598,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -22788,6 +22568,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -22871,86 +22663,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -23346,6 +23058,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -23548,6 +23272,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -24510,6 +24242,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -24593,86 +24337,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -26158,6 +25822,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -26360,6 +26036,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -27322,6 +27006,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -27405,86 +27101,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -27880,6 +27496,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -28082,6 +27710,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -29044,6 +28680,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -29127,86 +28775,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -29602,6 +29170,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -29804,6 +29384,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -30766,6 +30354,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -30849,86 +30449,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -33224,6 +32744,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -33426,6 +32958,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -34392,6 +33932,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -34475,86 +34027,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -34950,6 +34422,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -35152,6 +34636,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -36118,6 +35610,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -36201,86 +35705,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -36676,6 +36100,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -36878,6 +36314,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -37844,6 +37288,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -37927,86 +37383,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -41472,6 +40848,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -41670,6 +41058,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -42656,6 +42052,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -42739,86 +42147,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -43210,6 +42538,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -43408,6 +42748,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -44394,6 +43742,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -44477,86 +43837,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -44948,6 +44228,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -45146,6 +44438,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -46132,6 +45432,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -46215,86 +45527,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -48285,10 +47517,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -50348,10 +49576,6 @@
             "description": "",
             "depends": ""
         },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
-        },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
             "depends": "dmabuf,drm"
@@ -52409,10 +51633,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -54472,10 +53692,6 @@
             "description": "",
             "depends": ""
         },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
-        },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
             "depends": "dmabuf,drm"
@@ -56521,10 +55737,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -58575,10 +57787,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -62117,6 +61325,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -62167,6 +61379,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -62301,6 +61525,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -62363,6 +61599,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -62436,6 +61680,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -63453,6 +62701,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -63536,74 +62796,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -63963,6 +63155,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -64013,6 +63209,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -64147,6 +63355,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -64209,6 +63429,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -64282,6 +63510,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -65299,6 +64531,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -65382,74 +64626,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -65809,6 +64985,10 @@
             "description": "Broadcom 44xx/47xx 10/100 PCI ethernet driver (Compiled by ainas for DSM)",
             "depends": "ssb,libphy,mii"
         },
+        "backlight": {
+            "description": "Backlight Lowlevel Control Abstraction",
+            "depends": ""
+        },
         "bcm-phy-lib": {
             "description": "Broadcom PHY Library (Compiled by ainas for DSM)",
             "depends": "libphy"
@@ -65859,6 +65039,18 @@
         },
         "cdrom": {
             "description": "",
+            "depends": ""
+        },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing",
             "depends": ""
         },
         "cfg80211": {
@@ -65993,6 +65185,18 @@
             "description": "DME1737 sensors (Compiled by ainas for DSM)",
             "depends": "hwmon-vid"
         },
+        "drm": {
+            "description": "DRM panel infrastructure",
+            "depends": "drm_panel_orientation_quirks"
+        },
+        "drm_kms_helper": {
+            "description": "DRM KMS helper",
+            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
+        },
+        "drm_panel_orientation_quirks": {
+            "description": "",
+            "depends": ""
+        },
         "dvb-core": {
             "description": "DVB Core Driver (Compiled by ainas for DSM)",
             "depends": ""
@@ -66055,6 +65259,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM)",
             "depends": ""
         },
         "fbcon": {
@@ -66128,6 +65340,10 @@
         "i8042": {
             "description": "i8042 keyboard and mouse controller driver (Compiled by ainas for DSM)",
             "depends": ""
+        },
+        "i915": {
+            "description": "Intel Graphics",
+            "depends": "drm_kms_helper,drm,iosf_mbi,backlight,video,fb,button,i2c-algo-bit"
         },
         "iavf": {
             "description": "Intel(R) Ethernet Adaptive Virtual Function Driver (Compiled by ainas for DSM)",
@@ -67145,6 +66361,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -67228,74 +66456,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,drm_kms_helper,ttm,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM panel infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm,fb,fb_sys_fops,cfbfillrect,syscopyarea,cfbimgblt,sysfillrect,sysimgblt,cfbcopyarea"
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,backlight,i2c-algo-bit"
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,backlight,fb,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -69306,10 +68466,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -71365,10 +70521,6 @@
             "description": "",
             "depends": ""
         },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,drm_ttm_helper,i2c-algo-bit"
-        },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
             "depends": "dmabuf,drm"
@@ -73423,10 +72575,6 @@
             "description": "",
             "depends": ""
         },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,drm_ttm_helper,i2c-algo-bit"
-        },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
             "depends": "dmabuf,drm"
@@ -75464,10 +74612,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -78973,6 +78117,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -79171,6 +78327,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -80157,6 +79321,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -80240,86 +79416,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -80715,6 +79811,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -80913,6 +80021,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -81899,6 +81015,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -81982,86 +81110,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -82457,6 +81505,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -82655,6 +81715,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -83641,6 +82709,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -83724,86 +82804,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -85321,6 +84321,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -85527,6 +84539,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -86525,6 +85545,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -86608,86 +85640,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -87079,6 +86031,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -87285,6 +86249,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -88283,6 +87255,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -88366,86 +87350,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -88837,6 +87741,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -89043,6 +87959,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -90041,6 +88965,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -90124,86 +89060,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": "usbcore"
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usb-common": {
             "description": "",
@@ -92190,10 +91046,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -94217,10 +93069,6 @@
             "description": "",
             "depends": ""
         },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
-        },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
             "depends": "dmabuf,drm"
@@ -96242,10 +95090,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -99823,6 +98667,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -100029,6 +98885,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -101035,6 +99899,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -101118,86 +99994,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": ""
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usbnet": {
             "description": "USB network driver framework (Compiled by ainas for DSM)",
@@ -101577,6 +100373,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -101783,6 +100591,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -102789,6 +101605,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -102872,86 +101700,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": ""
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usbnet": {
             "description": "USB network driver framework (Compiled by ainas for DSM)",
@@ -103331,6 +102079,18 @@
             "description": "",
             "depends": ""
         },
+        "cfbcopyarea": {
+            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbfillrect": {
+            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "cfbimgblt": {
+            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "cfg80211": {
             "description": "wireless configuration support (Compiled by ainas for DSM)",
             "depends": "rfkill"
@@ -103537,6 +102297,14 @@
         },
         "f75375s": {
             "description": "F75373/F75375/F75387 hardware monitoring driver (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "fb": {
+            "description": "Framebuffer base (Compiled by ainas for DSM)",
+            "depends": "fbdev"
+        },
+        "fb_sys_fops": {
+            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
             "depends": ""
         },
         "fbcon": {
@@ -104543,6 +103311,18 @@
             "description": "",
             "depends": "llc"
         },
+        "syscopyarea": {
+            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysfillrect": {
+            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
+        "sysimgblt": {
+            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
+            "depends": ""
+        },
         "tcp_bic": {
             "description": "BIC TCP (Compiled by ainas for DSM)",
             "depends": ""
@@ -104626,86 +103406,6 @@
         "uhci-hcd": {
             "description": "USB Universal Host Controller Interface driver",
             "depends": ""
-        },
-        "update/amdgpu": {
-            "description": "AMD GPU (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,gpu-sched,backlight,fb,i2c-algo-bit"
-        },
-        "update/backlight": {
-            "description": "Backlight Lowlevel Control Abstraction (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbcopyarea": {
-            "description": "Generic software accelerated copyarea (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbfillrect": {
-            "description": "Generic software accelerated fill rectangle (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/cfbimgblt": {
-            "description": "Generic software accelerated imaging drawing (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm": {
-            "description": "DRM bridge infrastructure (Compiled by ainas for DSM)",
-            "depends": "drm_panel_orientation_quirks"
-        },
-        "update/drm_kms_helper": {
-            "description": "DRM KMS helper (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/drm_mipi_dsi": {
-            "description": "MIPI DSI Bus (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/drm_panel_orientation_quirks": {
-            "description": "",
-            "depends": ""
-        },
-        "update/fb": {
-            "description": "Framebuffer base (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/fb_sys_fops": {
-            "description": "Generic file read (fb in system RAM) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/gpu-sched": {
-            "description": "DRM GPU scheduler (Compiled by ainas for DSM)",
-            "depends": "drm"
-        },
-        "update/i915": {
-            "description": "Intel Graphics (Compiled by ainas for DSM)",
-            "depends": "drm_kms_helper,drm,intel-gtt,interval_tree,drm_mipi_dsi,backlight,i2c-algo-bit"
-        },
-        "update/intel-gtt": {
-            "description": "",
-            "depends": ""
-        },
-        "update/interval_tree": {
-            "description": "",
-            "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,interval_tree,backlight,i2c-algo-bit"
-        },
-        "update/syscopyarea": {
-            "description": "Generic copyarea (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysfillrect": {
-            "description": "Generic fill rectangle (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/sysimgblt": {
-            "description": "1-bit/8-bit to 1-32 bit color expansion (sys-to-sys) (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "update/ttm": {
-            "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
-            "depends": "drm"
         },
         "usbnet": {
             "description": "USB network driver framework (Compiled by ainas for DSM)",
@@ -106688,10 +105388,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -108726,10 +107422,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
@@ -110768,10 +109460,6 @@
         "update/intel-gtt": {
             "description": "",
             "depends": ""
-        },
-        "update/radeon": {
-            "description": "ATI Radeon (Compiled by ainas for DSM)",
-            "depends": "drm,ttm,drm_kms_helper,drm_display_helper,dmabuf,drm_suballoc_helper,backlight,i915-compat,drm_ttm_helper,i2c-algo-bit"
         },
         "update/ttm": {
             "description": "TTM memory manager subsystem (for DRM device) (Compiled by ainas for DSM)",
