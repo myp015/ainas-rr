@@ -168,14 +168,15 @@ def getpats(workpath, jsonpath, xlsxpath):
             continue
         models.append(name)
 
+    urlInfo = "https://www.synology.com/api/support/findDownloadInfo?lang=zh-tw"
+    urlSteps = "https://www.synology.com/api/support/findUpgradeSteps?"
+    # urlInfo = "https://www.synology.cn/api/support/findDownloadInfo?lang=zh-cn"
+    # urlSteps = "https://www.synology.cn/api/support/findUpgradeSteps?"
+
     pats = {}
     for M in models:
         pats[M] = {}
         version = "7"
-        urlInfo = "https://www.synology.com/api/support/findDownloadInfo?lang=zh-tw"
-        urlSteps = "https://www.synology.com/api/support/findUpgradeSteps?"
-        # urlInfo = "https://www.synology.cn/api/support/findDownloadInfo?lang=zh-cn"
-        # urlSteps = "https://www.synology.cn/api/support/findUpgradeSteps?"
 
         major = f"&major={version.split('.')[0]}" if len(version.split(".")) > 0 else ""
         minor = f"&minor={version.split('.')[1]}" if len(version.split(".")) > 1 else ""
@@ -278,19 +279,41 @@ def getpats(workpath, jsonpath, xlsxpath):
                             "sum": S["files"][0].get("checksum", "0" * 32),
                         }
 
-    # DSM 6.2 不在官方 7.x 升级 API 的覆盖范围（RR 24.4.0 起已移除 6.2），上游 pats.xlsx
-    # 也没有 6.2 行。2in1 的 6.2 版本线仍要装系统，这里按官方固定布局补齐两条：
-    #   https://global.synologydownload.com/download/DSM/release/6.2.4/25556/DSM_<型号>_25556.pat
-    # 型号中的 '+' 按官方 URL 规则编码为 %2B；sum 用全 0（跳过校验，与表内其他行一致）。
-    for _M in ("DS918+", "DS3617xs"):
-        pats.setdefault(_M, {}).setdefault(
-            "6.2.4-25556-0",
-            {
-                "url": "https://global.synologydownload.com/download/DSM/release/6.2.4/25556/"
-                f"DSM_{_M.replace('+', '%2B')}_25556.pat",
-                "sum": "0" * 32,
-            },
-        )
+    # DSM 6.2 不在默认（7.x）查询范围内：findDownloadInfo 不传 major 时只返回 7.x。
+    # 但显式带 major=6&minor=2 仍能查到 6.2.4 的官方 PAT，因此按 platforms.yml 的
+    # models62 逐型号查询，不再硬编码型号列表（硬编码曾只补了 DS918+/DS3617xs 两条，
+    # 其余 21 个 6.2 型号在 dsm_setup 里匹配不到 6.2.4-* 而回退到 7.x 报版本不匹配）。
+    # 注意：官方没有 6.2 的型号（如 HD6500）接口会回落成 7.x，必须校验 build_ver 以 "6.2" 开头。
+    # 6.2 的 files 项没有 checksum 字段，sum 用全 0（跳过校验，与表内其他行一致）。
+    if isinstance(platforms, dict):
+        models62 = []
+        for _P in platforms.values():
+            for _M in (_P or {}).get("models62", []) or []:
+                if _M not in models62:
+                    models62.append(_M)
+
+        for M in models62:
+            try:
+                req62 = session.get(
+                    f"{urlInfo}&product={M.replace('+', '%2B')}&major=6&minor=2", timeout=10, verify=False
+                )
+                req62.encoding = "utf-8"
+                data62 = json.loads(req62.text)
+            except Exception as e:
+                click.echo(f"Error: Failed to query DSM 6.2 info for {M}: {e}")
+                sys.exit(1)
+
+            system_item62 = __get_system_item(data62)
+            if not system_item62 or not str(system_item62["build_ver"]).startswith("6.2"):
+                click.echo(f"[INFO] {M} 无 DSM 6.2 官方版本，跳过")
+                continue
+
+            V = __fullversion(f"{system_item62['build_ver']}-{system_item62['build_num']}-{system_item62['nano']}")
+            if V not in pats.setdefault(M, {}):
+                pats[M][V] = {
+                    "url": system_item62["files"][0]["url"].split("?")[0],
+                    "sum": system_item62["files"][0].get("checksum", "0" * 32),
+                }
 
     if jsonpath:
         with open(jsonpath, "w") as f:
