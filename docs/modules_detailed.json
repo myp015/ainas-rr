@@ -404948,12 +404948,6 @@
                 "pci:v00001425d00004800sv*sd*bc*sc*i*"
             ]
         },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
-            "depends": "",
-            "firmware": "",
-            "alias": ""
-        },
         "dm9601": {
             "description": "Davicom DM96xx USB 10/100 ethernet devices (Compiled by ainas for DSM)",
             "depends": "usbnet,mii",
@@ -414347,12 +414341,6 @@
                 "pci:v00001425d00004800sv*sd*bc*sc*i*"
             ]
         },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
-            "depends": "",
-            "firmware": "",
-            "alias": ""
-        },
         "dm9601": {
             "description": "Davicom DM96xx USB 10/100 ethernet devices (Compiled by ainas for DSM)",
             "depends": "usbnet,mii",
@@ -423745,12 +423733,6 @@
                 "pci:v00001425d00004801sv*sd*bc*sc*i*",
                 "pci:v00001425d00004800sv*sd*bc*sc*i*"
             ]
-        },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
-            "depends": "",
-            "firmware": "",
-            "alias": ""
         },
         "dm9601": {
             "description": "Davicom DM96xx USB 10/100 ethernet devices (Compiled by ainas for DSM)",

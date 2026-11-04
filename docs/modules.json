@@ -89563,10 +89563,6 @@
             "description": "Chelsio T4/T5/T6 Virtual Function (VF) Network Driver (Compiled by ainas for DSM)",
             "depends": ""
         },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
-            "depends": ""
-        },
         "dm9601": {
             "description": "Davicom DM96xx USB 10/100 ethernet devices (Compiled by ainas for DSM)",
             "depends": "usbnet,mii"
@@ -91585,10 +91581,6 @@
             "description": "Chelsio T4/T5/T6 Virtual Function (VF) Network Driver (Compiled by ainas for DSM)",
             "depends": ""
         },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
-            "depends": ""
-        },
         "dm9601": {
             "description": "Davicom DM96xx USB 10/100 ethernet devices (Compiled by ainas for DSM)",
             "depends": "usbnet,mii"
@@ -93605,10 +93597,6 @@
         },
         "cxgb4vf": {
             "description": "Chelsio T4/T5/T6 Virtual Function (VF) Network Driver (Compiled by ainas for DSM)",
-            "depends": ""
-        },
-        "devlink": {
-            "description": "Devlink module (Compiled by ainas for DSM)",
             "depends": ""
         },
         "dm9601": {
