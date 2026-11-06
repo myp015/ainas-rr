@@ -12,20 +12,17 @@
 
 REPO="https://api.github.com/repos/myp015"
 
-# Convert po2mo
 # $1 path
 function convertpo2mo() {
   echo "Convert po2mo begin"
   local DEST_PATH="${1:-lang}"
   while read -r P; do
-    # Use msgfmt command to compile the .po file into a binary .mo file
     echo "msgfmt ${P} to ${P/.po/.mo}"
     msgfmt "${P}" -o "${P/.po/.mo}"
   done <<<"$(find "${DEST_PATH}" -type f -name 'rr.po')"
   echo "Convert po2mo end"
 }
 
-# Get extractor
 # $1 path
 function getExtractor() {
   echo "Getting syno extractor begin"
@@ -33,7 +30,6 @@ function getExtractor() {
   local CACHE_DIR="/tmp/pat"
   rm -rf "${CACHE_DIR}"
   mkdir -p "${CACHE_DIR}"
-  # Download pat file
   # global.synologydownload.com, global.download.synology.com, cndl.synology.cn
   local PAT_URL="https://global.synologydownload.com/download/DSM/release/7.0.1/42218/DSM_DS3622xs%2B_42218.pat"
   local PAT_FILE="DSM_DS3622xs+_42218.pat"
@@ -57,18 +53,15 @@ function getExtractor() {
   rm -rf "${DEST_PATH}"
   mkdir -p "${DEST_PATH}"
 
-  # Copy only necessary files
   for f in libcurl.so.4 libmbedcrypto.so.5 libmbedtls.so.13 libmbedx509.so.1 libmsgpackc.so.2 libsodium.so libsynocodesign-ng-virtual-junior-wins.so.7; do
     cp -f "${CACHE_DIR}/ramdisk/usr/lib/${f}" "${DEST_PATH}"
   done
   cp -f "${CACHE_DIR}/ramdisk/usr/syno/bin/scemd" "${DEST_PATH}/syno_extract_system_patch"
 
-  # Clean up
   rm -rf "${CACHE_DIR}"
   echo "Getting syno extractor end"
 }
 
-# Get latest Buildroot
 # $1 path
 # $2 (true|false[d]) include prerelease
 function getBuildroot() {
@@ -91,7 +84,6 @@ function getBuildroot() {
       [ ${STATUS:-0} -ne 200 ] && exit 1
     fi
   done <<<"$(curl -skL -H "Authorization: Bearer ${TOKEN}" "${REPO}/buildroot/releases/tags/${TAG}" | jq -r '.assets[] | "\(.id) \(.name)"')"
-  # Unzip Buildroot
   rm -rf "${CACHE_DIR}"
   mkdir -p "${CACHE_DIR}"
   unzip "${CACHE_FILE}" -d "${CACHE_DIR}"
@@ -103,7 +95,6 @@ function getBuildroot() {
   echo "Getting Buildroot end"
 }
 
-# Get latest CKs
 # $1 path
 # $2 (true|false[d]) include prerelease
 function getCKs() {
@@ -126,7 +117,6 @@ function getCKs() {
     fi
   done <<<"$(curl -skL -H "Authorization: Bearer ${TOKEN}" "${REPO}/ainas-cks/releases/tags/${TAG}" | jq -r '.assets[] | "\(.id) \(.name)"')"
   [ ! -f "${CACHE_FILE}" ] && exit 1
-  # Unzip CKs
   rm -rf "${DEST_PATH}"
   mkdir -p "${DEST_PATH}"
   unzip "${CACHE_FILE}" -d "${DEST_PATH}"
@@ -134,7 +124,6 @@ function getCKs() {
   echo "Getting CKs end"
 }
 
-# Get latest LKMs
 # $1 path
 # $2 (true|false[d]) include prerelease
 function getLKMs() {
@@ -157,7 +146,6 @@ function getLKMs() {
     fi
   done <<<"$(curl -skL -H "Authorization: Bearer ${TOKEN}" "${REPO}/ainas-lkm/releases/tags/${TAG}" | jq -r '.assets[] | "\(.id) \(.name)"')"
   [ ! -f "${CACHE_FILE}" ] && exit 1
-  # Unzip LKMs
   rm -rf "${DEST_PATH}"
   mkdir -p "${DEST_PATH}"
   unzip "${CACHE_FILE}" -d "${DEST_PATH}"
@@ -165,7 +153,6 @@ function getLKMs() {
   echo "Getting LKMs end"
 }
 
-# Get latest addons and install them
 # $1 path
 # $2 (true|false[d]) include prerelease
 function getAddons() {
@@ -190,7 +177,6 @@ function getAddons() {
   [ ! -f "${CACHE_FILE}" ] && exit 1
   rm -rf "${DEST_PATH}"
   mkdir -p "${DEST_PATH}"
-  # Install Addons
   rm -rf "${CACHE_DIR}"
   mkdir -p "${CACHE_DIR}"
   unzip "${CACHE_FILE}" -d "${CACHE_DIR}"
@@ -211,7 +197,6 @@ function getAddons() {
   echo "Getting Addons end"
 }
 
-# Get latest modules
 # $1 path
 # $2 (true|false[d]) include prerelease
 function getModules() {
@@ -234,7 +219,6 @@ function getModules() {
     fi
   done <<<"$(curl -skL -H "Authorization: Bearer ${TOKEN}" "${REPO}/syno-modules/releases/tags/${TAG}" | jq -r '.assets[] | "\(.id) \(.name)"')"
   [ ! -f "${CACHE_FILE}" ] && exit 1
-  # Unzip Modules
   rm -rf "${DEST_PATH}"
   mkdir -p "${DEST_PATH}"
   unzip "${CACHE_FILE}" -d "${DEST_PATH}"
@@ -242,7 +226,6 @@ function getModules() {
   echo "Getting Modules end"
 }
 
-# unpack initrd
 # $1 initrd file
 # $2 output path
 function unpackInitrd() {
@@ -270,7 +253,6 @@ function unpackInitrd() {
   esac
 }
 
-# repack initrd
 # $1 initrd file
 # $2 plugin path
 # $3 output file
@@ -434,7 +416,6 @@ function resizeImg() {
 
   sudo truncate -s ${SIZE}M "${OUTPUT_FILE}"
 
-  # 用 parted 找到最后一个分区号并将它扩展到磁盘末尾(保留起始扇区不动)
   local LASTPARTNUM
   LASTPARTNUM="$(sudo parted -m -s "${OUTPUT_FILE}" unit s print 2>/dev/null | awk -F: 'NR>2 && $2 ~ /^[0-9]+s$/ && $1 != "" {n=$1} END {print n}')"
   if [ -z "${LASTPARTNUM}" ]; then
@@ -459,7 +440,6 @@ function resizeImg() {
   sudo losetup -d "${LOOPX}"
 }
 
-# createvmx
 # $1 bootloader file
 # $2 vmx name
 function createvmx() {
@@ -470,13 +450,11 @@ function createvmx() {
     sudo apt install -y qemu-utils
   fi
 
-  # Convert raw image to VMDK
   rm -rf "VMX_${VMNAME}"
   mkdir -p "VMX_${VMNAME}"
-  qemu-img convert -O vmdk -o 'adapter_type=lsilogic,subformat=monolithicSparse,compat6' "${BLIMAGE}" "VMX_${VMNAME}/${VMNAME}-disk1.vmdk" # 'adapter_type=lsilogic,subformat=streamOptimized,compat6'
+  qemu-img convert -O vmdk -o 'adapter_type=lsilogic,subformat=monolithicSparse,compat6' "${BLIMAGE}" "VMX_${VMNAME}/${VMNAME}-disk1.vmdk"
   qemu-img create -f vmdk "VMX_${VMNAME}/${VMNAME}-disk2.vmdk" "32G"
 
-  # Create VM configuration
   cat <<_EOF_ >"VMX_${VMNAME}/${VMNAME}.vmx"
 .encoding = "UTF-8"
 config.version = "8"
@@ -540,7 +518,6 @@ _EOF_
 
 }
 
-# convertvmx
 # $1 bootloader file
 # $2 vmx file
 function convertvmx() {
@@ -557,7 +534,6 @@ function convertvmx() {
   mv -f "VMX_${VMNAME}" "${VMXPATH}"
 }
 
-# convertova
 # $1 bootloader file
 # $2 ova file
 function convertova() {
@@ -592,7 +568,6 @@ function convertova() {
   rm -rf "VMX_${VMNAME}"
 }
 
-# createvmc
 # $1 vhd file
 # $2 vmc file
 function createvmc() {

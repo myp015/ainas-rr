@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2022 Ing <https://github.com/wjz304>
 #
@@ -143,7 +142,6 @@ def getpats(workpath, jsonpath, xlsxpath):
 
     try:
         url = "http://update7.synology.com/autoupdate/genRSS.php?include_beta=1"
-        # url = "https://update7.synology.com/autoupdate/genRSS.php?include_beta=1"
 
         req = session.get(url, timeout=10, verify=False)
         req.encoding = "utf-8"
@@ -170,8 +168,6 @@ def getpats(workpath, jsonpath, xlsxpath):
 
     urlInfo = "https://www.synology.com/api/support/findDownloadInfo?lang=zh-tw"
     urlSteps = "https://www.synology.com/api/support/findUpgradeSteps?"
-    # urlInfo = "https://www.synology.cn/api/support/findDownloadInfo?lang=zh-cn"
-    # urlSteps = "https://www.synology.cn/api/support/findUpgradeSteps?"
 
     pats = {}
     for M in models:
