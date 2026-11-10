@@ -152,7 +152,15 @@ msgid "DOWN"
 msgstr ""
 
 #: boot.sh:410 init.sh:257
-msgid "NOT CONNECTED"
+msgid "NOT CONNECTED (No link detected. If the cable is plugged in, check the switch port or the driver.)"
+msgstr ""
+
+#: boot.sh:385 init.sh:53
+msgid "Some network controllers have no driver loaded (the detected network interfaces are still usable):"
+msgstr ""
+
+#: init.sh:50
+msgid "Network devices not found! No driver loaded for the following network controllers (the initrd is missing the driver or the hardware is unsupported):"
 msgstr ""
 
 #: boot.sh:414 init.sh:261

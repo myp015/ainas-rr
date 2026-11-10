@@ -47,8 +47,18 @@ printf "\033[1;32m%*s\033[0m\n" "${COLUMNS}" "${DATE}"
 
 # Get first MAC address
 ETHX="$(find /sys/class/net/ -mindepth 1 -maxdepth 1 ! -name lo -exec basename {} \; | sort -V)"
-# No network devices
-[ "$(echo "${ETHX}" | wc -w)" -le 0 ] && die "$(TEXT "Network devices not found! Please re execute init.sh after connecting to the network!")"
+UNDRIVEN_NICS="$(undrivenNics)"
+# No network devices：区分“网卡驱动未加载”与“没有网络硬件”，避免笼统提示未连接
+if [ "$(echo "${ETHX}" | wc -w)" -le 0 ]; then
+  if [ -n "${UNDRIVEN_NICS}" ]; then
+    die "$(TEXT "Network devices not found! No driver loaded for the following network controllers (the initrd is missing the driver or the hardware is unsupported):")${UNDRIVEN_NICS}"
+  fi
+  die "$(TEXT "Network devices not found! Please re execute init.sh after connecting to the network!")"
+fi
+# 有接口但仍有控制器未驱动：部分网卡驱动缺失，给出提示（已加载的网口仍可继续使用）
+if [ -n "${UNDRIVEN_NICS}" ]; then
+  printf "\033[1;33m%s\n%s\033[0m\n" "$(TEXT "Some network controllers have no driver loaded (the detected network interfaces are still usable):")" "${UNDRIVEN_NICS}"
+fi
 
 # If user config file not exists, initialize it
 if [ ! -f "${USER_CONFIG_FILE}" ]; then
@@ -272,7 +282,7 @@ for N in ${ETHX}; do
       break
     fi
     if [ "0" = "$(cat "/sys/class/net/${N}/carrier" 2>/dev/null)" ]; then
-      printf "\r%s(%s): %s\n" "${N}" "${MAC}@${DRIVER}" "$(TEXT "NOT CONNECTED")"
+      printf "\r%s(%s): %s\n" "${N}" "${MAC}@${DRIVER}" "$(TEXT "NOT CONNECTED (No link detected. If the cable is plugged in, check the switch port or the driver.)")"
       break
     fi
     if [ ${COUNT} -eq 15 ]; then # Under normal circumstances, no errors should occur here.

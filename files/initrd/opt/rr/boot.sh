@@ -381,6 +381,10 @@ else
   grub-editenv "${USER_GRUBENVFILE}" unset dsm_cmdline
   grub-editenv "${USER_GRUBENVFILE}" unset next_entry
   ETHX="$(find /sys/class/net/ -mindepth 1 -maxdepth 1 ! -name lo -exec basename {} \; | sort -V)"
+  UNDRIVEN_NICS="$(undrivenNics)"
+  if [ -n "${UNDRIVEN_NICS}" ]; then
+    printf "\033[1;33m%s\n%s\033[0m\n" "$(TEXT "Some network controllers have no driver loaded (the detected network interfaces are still usable):")" "${UNDRIVEN_NICS}"
+  fi
   printf "$(TEXT "Detected %s network cards.\n")" "$(echo "${ETHX}" | wc -w)"
   printf "$(TEXT "Checking Connect.")"
   COUNT=0
@@ -420,7 +424,7 @@ else
         break
       fi
       if [ "0" = "$(cat "/sys/class/net/${N}/carrier" 2>/dev/null)" ]; then
-        printf "\r%s(%s): %s\n" "${N}" "${MAC}@${DRIVER}" "$(TEXT "NOT CONNECTED")"
+        printf "\r%s(%s): %s\n" "${N}" "${MAC}@${DRIVER}" "$(TEXT "NOT CONNECTED (No link detected. If the cable is plugged in, check the switch port or the driver.)")"
         break
       fi
       if [ ${COUNT} -eq ${BOOTIPWAIT} ]; then # Under normal circumstances, no errors should occur here.

@@ -147,8 +147,16 @@ msgid "DOWN"
 msgstr "关闭"
 
 #: boot.sh:410 init.sh:257
-msgid "NOT CONNECTED"
-msgstr "未连接"
+msgid "NOT CONNECTED (No link detected. If the cable is plugged in, check the switch port or the driver.)"
+msgstr "未连接 (未检测到链路; 若网线已插好, 请检查交换机端口或网卡驱动.)"
+
+#: boot.sh:385 init.sh:53
+msgid "Some network controllers have no driver loaded (the detected network interfaces are still usable):"
+msgstr "部分网络控制器未加载驱动 (已检测到的网络接口仍可使用):"
+
+#: init.sh:50
+msgid "Network devices not found! No driver loaded for the following network controllers (the initrd is missing the driver or the hardware is unsupported):"
+msgstr "找不到网络设备! 以下网络控制器未加载驱动 (initrd 缺少对应驱动或硬件不受支持):"
 
 #: boot.sh:414 init.sh:261
 msgid "TIMEOUT (Please check the IP on the router.)"

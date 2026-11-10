@@ -33,6 +33,20 @@ function checkBootLoader() {
 }
 
 ###############################################################################
+# 列出没有被内核驱动接管的 PCI 以太网/网络控制器（用于区分“驱动未加载”和“网线未连接”）。
+# 有输出表示 initrd 缺少对应驱动或硬件不受支持；输出为空表示全部控制器已加载驱动。
+function undrivenNics() {
+  lspci -nnk 2>/dev/null | awk '
+    /Ethernet controller|Network controller/ {
+      if (dev != "" && !driven) print dev
+      dev = $0; driven = 0; next
+    }
+    /Kernel driver in use:/ { driven = 1 }
+    END { if (dev != "" && !driven) print dev }
+  '
+}
+
+###############################################################################
 # Check if loader is fully configured
 # Returns 1 if not
 function loaderIsConfigured() {
